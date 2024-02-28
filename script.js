@@ -1,14 +1,22 @@
-﻿let scoreUser = 0;
+﻿let scorePlayer = 0;
 let scoreComputer = 0;
 
+// Computer random choice
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     const choice = Math.floor(Math.random() * choices.length);
     return choices[choice]
 }
 
+// Player choice case-insensitive (white spaces trimmed)
+function getPlayerChoice() {
+    const choice = prompt("Rock, paper or scissors?").trim().toLowerCase(); 
+    return choice
+}
+
+// Single round
 function playRound(playerSelection, computerSelection) {
-    console.log(playerSelection, computerSelection);
+    console.log("Your choice: " + playerSelection + ". " + "Computer choice: " + computerSelection);
 
     if (playerSelection === 'rock') {
         switch(computerSelection) {
@@ -48,31 +56,45 @@ function playRound(playerSelection, computerSelection) {
                 alert("You Win! Scissors beats Paper");
                 return 1;
         }    
+    }
+    else {
+        alert("Enter correct choice!");
+        return 2;
     }      
   }
   
-  function playGame() {
-    for (let i = 0; i < 5; i++) {
+function playGame() {
+    // Number of rounds
+    let j = 5;
+    // Rounds
+    for (let i = 0; i < j; i++) {
         const computerSelection = getComputerChoice();
-        const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
+        const playerSelection = getPlayerChoice();
+
         result = playRound(playerSelection, computerSelection);
         if (result === 1) {
-            scoreUser++;
+            scorePlayer++;
         }
         else if (result === -1) {
             scoreComputer++;
         }
+        // If player entered incorrect choice, number of rounds is increased
+        else if (result === 2) {
+            j++;
+        }
     }
-    if (scoreUser > scoreComputer) {
+
+    // Final score
+    if (scorePlayer > scoreComputer) {
         alert("You win the game!")
     }
-    else if (scoreComputer > scoreUser) {
+    else if (scoreComputer > scorePlayer) {
         alert("You lose the game!")
     }
     else {
         alert("It's a tie! Game over!")
     }
-    console.log(scoreUser, scoreComputer) 
+    console.log("Your score: " + scorePlayer + ". " + "Computer score: " + scoreComputer) 
   }
 
-  playGame();  
+playGame();  
