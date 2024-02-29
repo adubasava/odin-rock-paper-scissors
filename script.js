@@ -1,100 +1,85 @@
 ﻿let scorePlayer = 0;
 let scoreComputer = 0;
 
-// Computer random choice
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     const choice = Math.floor(Math.random() * choices.length);
-    return choices[choice]
+    return choices[choice];
 }
 
-// Player choice case-insensitive (white spaces trimmed)
-function getPlayerChoice() {
-    const choice = prompt("Rock, paper or scissors?").trim().toLowerCase(); 
-    return choice
-}
+const buttons = document.querySelectorAll('button');
 
-// Single round
-function playRound(playerSelection, computerSelection) {
-    console.log("Your choice: " + playerSelection + ". " + "Computer choice: " + computerSelection);
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    playRound(button.id);
+  });
+});
 
+const results = document.querySelector('div');
+results.style.fontSize = '32px';
+const choices = document.querySelector('p');
+const final = document.querySelector('h3');
+
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
+    final.style.color = 'black';
+    final.textContent = "Results";
+    choices.style.color = 'gray';
+    choices.textContent = "Your choice: " + playerSelection + ". " + "Computer choice: " + computerSelection;
+    
     if (playerSelection === 'rock') {
         switch(computerSelection) {
             case 'rock':
-                alert("It's a tie!");
-                return 0;
+                break;
             case 'paper':
-                alert("You Lose! Paper beats Rock");
-                return -1;
+                scoreComputer++;
+                break;
             case 'scissors':
-                alert("You Win! Rock beats Scissors");
-                return 1;
+                scorePlayer++;
+                break;
         }    
     }
     else if (playerSelection === 'paper') {
         switch(computerSelection) {
             case 'paper':
-                alert("It's a tie!");
-                return 0;
+                break;
             case 'scissors':
-                alert("You Lose! Scissors beats Paper");
-                return -1;
+                scoreComputer++;
+                break;
             case 'rock':
-                alert("You Win! Paper beats Rock");
-                return 1;
+                scorePlayer++;
+                break;
         }    
     }
     else if (playerSelection === 'scissors') {
         switch(computerSelection) {
             case 'scissors':
-                alert("It's a tie!");
-                return 0;
+                break;
             case 'rock':
-                alert("You Lose! Rock beats Scissors");
-                return -1;
+                scoreComputer++;
+                break;
             case 'paper':
-                alert("You Win! Scissors beats Paper");
-                return 1;
+                scorePlayer++;
+                break;
         }    
     }
-    else {
-        alert("Enter correct choice!");
-        return 2;
-    }      
-  }
-  
-function playGame() {
-    // Number of rounds
-    let j = 5;
-    // Rounds
-    for (let i = 0; i < j; i++) {
-        const computerSelection = getComputerChoice();
-        const playerSelection = getPlayerChoice();
-
-        result = playRound(playerSelection, computerSelection);
-        if (result === 1) {
-            scorePlayer++;
-        }
-        else if (result === -1) {
-            scoreComputer++;
-        }
-        // If player entered incorrect choice, number of rounds is increased
-        else if (result === 2) {
-            j++;
-        }
+    
+    results.textContent = `${scorePlayer} : ${scoreComputer}`;  
+    
+    if (scorePlayer === 5) {
+        final.style.color = 'green';
+        final.textContent = "You won the game!";
+        scorePlayer = 0;
+        scoreComputer = 0;
+        choices.style.color = 'blue';
+        choices.textContent = "Make your choice to start again!";
     }
-
-    // Final score
-    if (scorePlayer > scoreComputer) {
-        alert("You win the game!")
-    }
-    else if (scoreComputer > scorePlayer) {
-        alert("You lose the game!")
-    }
-    else {
-        alert("It's a tie! Game over!")
-    }
-    console.log("Your score: " + scorePlayer + ". " + "Computer score: " + scoreComputer) 
-  }
-
-playGame();  
+    else if (scoreComputer === 5) {
+        final.style.color = 'red';
+        final.textContent = "You lose the game!";        
+        scorePlayer = 0;
+        scoreComputer = 0;
+        choices.style.color = 'blue';
+        choices.textContent = "Make your choice to start again!";
+    }    
+}
