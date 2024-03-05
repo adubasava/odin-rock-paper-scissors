@@ -7,13 +7,9 @@ function getComputerChoice() {
     return choices[choice];
 }
 
-const buttons = document.querySelectorAll('button');
-
-buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    playRound(button.id);
-  });
-});
+document.querySelector('.buttonContainer').addEventListener('click', event => {
+    playRound(event.target.id);
+})
 
 const results = document.querySelector('#results');
 const choices = document.querySelector('p');
