@@ -27,49 +27,103 @@ function playRound(playerSelection) {
     choices.style.color = 'gray';
     choices.innerHTML = "Your choice: " + "<strong>" + playerSelection + "</strong>" + ". " + "Computer choice: " + "<strong>" + computerSelection + "</strong>";
    
-    if (playerSelection === 'rock') {
+    if (playerSelection === computerSelection) {
+        choices.innerHTML +=
+        [
+            "<br>",
+            "<br>",
+            "<center>",
+            "<p style='color:#008CBA;'>",
+            "Tie!",
+            "</p>",
+            "</center>",
+          ].join(''); 
+        } else if (playerSelection === 'rock') {
         switch(computerSelection) {
-            case 'rock':
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#008CBA;'>" + "Tie!" + "</style>" + "</center>";
-                break;
             case 'paper':
                 scoreComputer++;
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#f44336;'>" + "Paper beats rock" + "</style>" + "</center>";
+                choices.innerHTML +=
+                [
+                    "<br>",
+                    "<br>",
+                    "<center>",
+                    "<p style='color:#f44336;'>",
+                    "Paper beats rock!",
+                    "</p>",
+                    "</center>",
+                  ].join('');                
                 break;
             case 'scissors':
                 scorePlayer++;
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#04AA6D;'>" + "Rock beats scissors" + "</style>" + "</center>";
+                choices.innerHTML += 
+                [
+                    "<br>",
+                    "<br>",
+                    "<center>",
+                    "<p style='color:#04AA6D;'>",
+                    "Rock beats scissors!",
+                    "</p>",
+                    "</center>",
+                  ].join('');  
                 break;
         }    
-    }
-    else if (playerSelection === 'paper') {
-        switch(computerSelection) {
-            case 'paper':
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#008CBA;'>" + "Tie!" + "</style>" + "</center>";
-                break;
+    } else if (playerSelection === 'paper') {
+        switch(computerSelection) {            
             case 'scissors':
                 scoreComputer++;
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#f44336;'>" + "Scissors beats paper" + "</style>" + "</center>";
+                choices.innerHTML +=
+                [
+                    "<br>",
+                    "<br>",
+                    "<center>",
+                    "<p style='color:#f44336;'>",
+                    "Scissors beats paper!",
+                    "</p>",
+                    "</center>",
+                  ].join('');  
                 break;
             case 'rock':
                 scorePlayer++;
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#04AA6D;'>" + "Paper beats rock" + "</style>" + "</center>";
+                choices.innerHTML +=
+                [
+                    "<br>",
+                    "<br>",
+                    "<center>",
+                    "<p style='color:#04AA6D;'>",
+                    "Paper beats rock!",
+                    "</p>",
+                    "</center>",
+                  ].join('');  
                 break;
         }    
-    }
-    else if (playerSelection === 'scissors') {
-        switch(computerSelection) {
-            case 'scissors':
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#008CBA;'>" + "Tie!" + "</style>" + "</center>";
-                break;
+    } else if (playerSelection === 'scissors') {
+        switch(computerSelection) {           
             case 'rock':
                 scoreComputer++;
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#f44336;'>" + "Rock beats scissors" + "</style>" + "</center>";
-                break;
+                choices.innerHTML += 
+                [
+                    "<br>",
+                    "<br>",
+                    "<center>",
+                    "<p style='color:#f44336;'>",
+                    "Rock beats scissors!",
+                    "</p>",
+                    "</center>",
+                  ].join('');  
+               break;
             case 'paper':
                 scorePlayer++;
-                choices.innerHTML += "<br>" + "<br>" + "<center>" + "<p style='color:#04AA6D;'>" + "Scissors beats paper" + "</style>" + "</center>";
-                break;
+                choices.innerHTML += 
+                [
+                    "<br>",
+                    "<br>",
+                    "<center>",
+                    "<p style='color:#04AA6D;'>",
+                    "Scissors beats paper!",
+                    "</p>",
+                    "</center>",
+                  ].join('');  
+               break;
         }    
     }
     
